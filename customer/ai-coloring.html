@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coloring Style - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/ai-coloring.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="./dashboard.html" class="nav-link">Dashboard</a>
+                <a href="./browse.html" class="nav-link">Jelajahi</a>
+                <a href="./orders.html" class="nav-link">Pesanan</a>
+                <a href="ai-coloring.html" class="nav-link active">AI Style</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="./cart.html" class="btn btn-ghost btn-sm" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <div class="user-menu">
+                    <button class="btn btn-ghost" id="userMenuBtn" style="display: flex; align-items: center; gap: var(--space-2);">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">User</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="./profile.html" class="dropdown-item">
+                            <span>👤</span> Profil
+                        </a>
+                        <a href="./dashboard.html" class="dropdown-item">
+                            <span>📊</span> Dashboard
+                        </a>
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-2) 0;">
+                        <button onclick="logout()" class="dropdown-item" style="color: var(--error);">
+                            <span>🚪</span> Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5rem; padding: var(--space-8);">
+        <div class="content-wrapper">
+            <!-- Premium Lock (Non-Premium Users) -->
+            <div id="premiumLock" style="display: none;">
+                <div class="card" style="text-align: center; padding: var(--space-12);">
+                    <div style="font-size: 4rem; margin-bottom: var(--space-4);">🔒</div>
+                    <h2 style="margin-bottom: var(--space-4);">Fitur Premium</h2>
+                    <p style="color: var(--gray-600); max-width: 500px; margin: 0 auto var(--space-6);">
+                        Upgrade ke Premium untuk mengakses fitur AI Coloring Style dan dapatkan rekomendasi pakaian yang cocok dengan warna kulit dan gaya personalmu.
+                    </p>
+                    <div class="premium-features" style="display: flex; justify-content: center; gap: var(--space-6); margin-bottom: var(--space-8); flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: var(--space-2);">🎨</div>
+                            <div style="font-weight: 600;">Analisis Warna</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: var(--space-2);">👔</div>
+                            <div style="font-weight: 600;">Rekomendasi Gaya</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: var(--space-2);">🎯</div>
+                            <div style="font-weight: 600;">Matching 95%</div>
+                        </div>
+                    </div>
+                    <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--primary-600); margin-bottom: var(--space-2);">
+                        Rp 35.000<span style="font-size: var(--text-base); color: var(--gray-500); font-weight: 400;">/tahun</span>
+                    </div>
+                    <a href="../premium.html" class="btn btn-primary btn-lg">Upgrade ke Premium</a>
+                    <div style="margin-top: var(--space-4);">
+                        <button onclick="setPremiumAccount()" class="btn btn-ghost btn-lg" style="color: var(--primary-600); text-decoration: underline;">
+                            Akun Sudah Premium
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Feature Content (Premium Users) -->
+            <div id="aiContent" style="display: none;">
+                <div class="page-header" style="text-align: center; margin-bottom: var(--space-8);">
+                    <div class="section-label" style="display: inline-flex;">
+                        <span>🤖 AI Powered</span>
+                    </div>
+                    <h1 class="page-title">AI Coloring Style For You</h1>
+                    <p class="page-subtitle">Upload fotomu dan dapatkan analisis warna serta rekomendasi gaya berpakaian personal</p>
+                </div>
+
+                <!-- Camera Section -->
+                <div class="card" style="margin-bottom: var(--space-8);">
+                    <div class="card-body" style="text-align: center; padding: var(--space-12);">
+                        <div id="cameraArea">
+                            <div style="font-size: 4rem; margin-bottom: var(--space-4);">📹</div>
+                            <h3 style="margin-bottom: var(--space-2);">Gunakan Kamera untuk Analisis</h3>
+                            <p style="color: var(--gray-500); margin-bottom: var(--space-4);">Izinkan akses kamera untuk deteksi warna kulit real-time</p>
+                            <button onclick="startCamera()" class="btn btn-primary" id="startCameraBtn">Aktifkan Kamera</button>
+                        </div>
+                        
+                        <!-- Camera View -->
+                        <div id="cameraView" style="display: none;">
+                            <video id="cameraVideo" autoplay playsinline style="width: 100%; max-width: 400px; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); margin-bottom: var(--space-4);"></video>
+                            <canvas id="cameraCanvas" style="display: none;"></canvas>
+                            <div>
+                                <button onclick="capturePhoto()" class="btn btn-primary btn-lg" id="captureBtn">
+                                    📸 Ambil Foto
+                                </button>
+                                <button onclick="stopCamera()" class="btn btn-ghost" style="margin-left: var(--space-2);">
+                                    ❌ Stop Kamera
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Preview Area -->
+                        <div id="previewArea" style="display: none;">
+                            <div style="position: relative; display: inline-block; margin-bottom: var(--space-6);">
+                                <img id="previewImage" src="" alt="Preview" style="max-width: 300px; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);">
+                                <button onclick="resetUpload()" style="position: absolute; top: -10px; right: -10px; width: 32px; height: 32px; background: var(--error); color: white; border-radius: var(--radius-full); border: none; cursor: pointer;">✕</button>
+                            </div>
+                            <div>
+                                <button onclick="analyzePhoto()" class="btn btn-primary btn-lg" id="analyzeBtn">
+                                    ✨ Analisis Sekarang
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Loading State -->
+                        <div id="loadingArea" style="display: none;">
+                            <div class="ai-loading" style="margin-bottom: var(--space-4);">
+                                <div class="loading-ring"></div>
+                            </div>
+                            <p style="color: var(--gray-600);">AI sedang menganalisis warna kulit dan undertone...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Results -->
+                <div id="analysisResults" style="display: none;">
+                    <!-- Skin Tone Analysis -->
+                    <div class="card" style="margin-bottom: var(--space-6);">
+                        <div class="card-header">
+                            <h3>🎨 Hasil Analisis Warna</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="analysis-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8);">
+                                <div>
+                                    <div style="margin-bottom: var(--space-4);">
+                                        <label style="font-size: var(--text-sm); color: var(--gray-500);">Skin Tone</label>
+                                        <div id="skinToneResult" style="font-size: var(--text-2xl); font-weight: 700; color: var(--primary-700);">Warm</div>
+                                    </div>
+                                    <div style="margin-bottom: var(--space-4);">
+                                        <label style="font-size: var(--text-sm); color: var(--gray-500);">Undertone</label>
+                                        <div id="undertoneResult" style="font-size: var(--text-2xl); font-weight: 700; color: var(--primary-700);">Golden</div>
+                                    </div>
+                                    <div>
+                                        <label style="font-size: var(--text-sm); color: var(--gray-500);">Season</label>
+                                        <div id="seasonResult" style="font-size: var(--text-2xl); font-weight: 700; color: var(--primary-700);">Autumn</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label style="font-size: var(--text-sm); color: var(--gray-500); margin-bottom: var(--space-3); display: block;">Color Palette</label>
+                                    <div id="colorPalette" style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+                                        <!-- Dynamic colors -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Colors -->
+                    <div class="card" style="margin-bottom: var(--space-6);">
+                        <div class="card-header">
+                            <h3>✅ Warna yang Cocok</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="recommendedColors" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-4);">
+                                <!-- Dynamic recommended colors -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colors to Avoid -->
+                    <div class="card" style="margin-bottom: var(--space-6);">
+                        <div class="card-header">
+                            <h3>❌ Warna yang Kurang Cocok</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="avoidColors" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-4);">
+                                <!-- Dynamic avoid colors -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Style Recommendations -->
+                    <div class="card" style="margin-bottom: var(--space-6);">
+                        <div class="card-header">
+                            <h3>👔 Rekomendasi Gaya</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="styleRecommendations" style="display: flex; flex-wrap: wrap; gap: var(--space-3);">
+                                <!-- Dynamic style tags -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Matching Products -->
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>🛍️ Produk yang Cocok Untukmu</h3>
+                            <a href="browse.html" class="btn btn-ghost btn-sm">Lihat Semua</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="product-grid" id="matchingProducts">
+                                <!-- Dynamic matching products -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/ai-coloring.js"></script>
+</body>
+</html>

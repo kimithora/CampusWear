@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CampusWear</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="./dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="./browse.html" class="nav-link">Jelajahi</a>
+                <a href="./orders.html" class="nav-link">Pesanan</a>
+                <a href="./ai-coloring.html" class="nav-link">AI Style</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="./cart.html" class="btn btn-ghost btn-sm" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <div class="user-menu">
+                    <button class="btn btn-ghost" id="userMenuBtn" style="display: flex; align-items: center; gap: var(--space-2);">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">User</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="./profile.html" class="dropdown-item">
+                            <span>👤</span> Profil
+                        </a>
+                        <a href="./dashboard.html" class="dropdown-item">
+                            <span>📊</span> Dashboard
+                        </a>
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-2) 0;">
+                        <button onclick="logout()" class="dropdown-item" style="color: var(--error);">
+                            <span>🚪</span> Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5rem; padding: var(--space-8);">
+        <div class="content-wrapper">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div>
+                    <h1 class="page-title">Selamat Datang, <span id="welcomeName">User</span>! 👋</h1>
+                    <p class="page-subtitle">Ini adalah dashboard personalmu. Lihat rekomendasi dan kelola aktivitasmu.</p>
+                </div>
+                <div class="premium-badge" id="premiumBadge" style="display: none;">
+                    <span>⭐</span> Premium Member
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid" style="margin-bottom: var(--space-8);">
+                <div class="stat-card">
+                    <div class="stat-label">Total Pesanan</div>
+                    <div class="stat-value" id="totalOrders">0</div>
+                    <div class="stat-change positive">
+                        <span>↑</span> Pesanan aktif
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Item di Keranjang</div>
+                    <div class="stat-value" id="cartItems">0</div>
+                    <div class="stat-change">
+                        <span>🛒</span> Siap checkout
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Wishlist</div>
+                    <div class="stat-value" id="wishlistCount">0</div>
+                    <div class="stat-change">
+                        <span>❤️</span> Item favorit
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Koin Rewards</div>
+                    <div class="stat-value" id="rewardPoints">0</div>
+                    <div class="stat-change positive">
+                        <span>+</span> Dapat digunakan
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Recommendation Section (Premium Only) -->
+            <div class="section-card" id="aiSection" style="display: none; margin-bottom: var(--space-8);">
+                <div class="section-header-flex">
+                    <div>
+                        <h2 class="section-title">🎯 Rekomendasi AI Untukmu</h2>
+                        <p class="section-description">Berdasarkan analisis warna dan gaya pakaianmu</p>
+                    </div>
+                    <a href="ai-coloring.html" class="btn btn-primary">Lihat Analisis Lengkap</a>
+                </div>
+                
+                <div class="ai-profile-summary" style="background: linear-gradient(135deg, var(--primary-50), var(--secondary-100)); padding: var(--space-6); border-radius: var(--radius-xl); margin-bottom: var(--space-6);">
+                    <div class="ai-colors" id="aiColors">
+                        <!-- Dynamic content -->
+                    </div>
+                    <p id="aiDescription" style="color: var(--gray-700); margin-top: var(--space-4);"></p>
+                </div>
+
+                <div class="product-grid" id="aiRecommendations">
+                    <!-- Dynamic recommendations -->
+                </div>
+            </div>
+
+            <!-- Upgrade to Premium CTA (Non-Premium) -->
+            <div class="section-card premium-cta" id="premiumCta" style="margin-bottom: var(--space-8);">
+                <div class="premium-cta-content">
+                    <div>
+                        <h2>✨ Unlock AI Coloring Style</h2>
+                        <p>Dapatkan rekomendasi pakaian yang cocok dengan warna kulit dan gaya personalmu dengan teknologi AI.</p>
+                        <ul class="premium-features">
+                            <li>🎨 Analisis warna personal</li>
+                            <li>👔 Rekomendasi gaya berpakaian</li>
+                            <li>🎯 Matching 95% akurat</li>
+                        </ul>
+                    </div>
+                    <div class="premium-cta-action">
+                        <div class="price-tag">Rp 35.000<span>/tahun</span></div>
+                        <a href="../premium.html" class="btn btn-primary btn-lg">Upgrade Sekarang</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="section-card">
+                <div class="section-header-flex">
+                    <h2 class="section-title">📦 Pesanan Terbaru</h2>
+                    <a href="orders.html" class="btn btn-ghost">Lihat Semua</a>
+                </div>
+                
+                <div class="orders-list" id="recentOrders">
+                    <div class="empty-state-small">
+                        <div class="empty-icon">📭</div>
+                        <p>Belum ada pesanan</p>
+                        <a href="browse.html" class="btn btn-primary btn-sm">Mulai Belanja</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Browse Categories -->
+            <div class="section-card" style="margin-top: var(--space-8);">
+                <h2 class="section-title" style="margin-bottom: var(--space-6);">🔍 Jelajahi Kategori</h2>
+                <div class="category-grid">
+                    <a href="browse.html?category=kaos" class="category-card">
+                        <div class="category-icon">👕</div>
+                        <span>Kaos</span>
+                    </a>
+                    <a href="browse.html?category=kemeja" class="category-card">
+                        <div class="category-icon">👔</div>
+                        <span>Kemeja</span>
+                    </a>
+                    <a href="browse.html?category=celana" class="category-card">
+                        <div class="category-icon">👖</div>
+                        <span>Celana</span>
+                    </a>
+                    <a href="browse.html?category=jaket" class="category-card">
+                        <div class="category-icon">🧥</div>
+                        <span>Jaket</span>
+                    </a>
+                    <a href="browse.html?category=hoodie" class="category-card">
+                        <div class="category-icon"> hoodie</div>
+                        <span>Hoodie</span>
+                    </a>
+                    <a href="browse.html?category=aksesoris" class="category-card">
+                        <div class="category-icon">🧢</div>
+                        <span>Aksesoris</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: var(--space-12);">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: var(--space-6);">
+                <p>&copy; 2026 CampusWear. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/customer-dashboard.js"></script>
+</body>
+</html>

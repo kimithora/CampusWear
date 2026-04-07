@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Saya - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="./dashboard.html" class="nav-link">Dashboard</a>
+                <a href="./browse.html" class="nav-link">Jelajahi</a>
+                <a href="./orders.html" class="nav-link active">Pesanan</a>
+                <a href="./ai-coloring.html" class="nav-link">AI Style</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="./cart.html" class="btn btn-ghost btn-sm" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <div class="user-menu">
+                    <button class="btn btn-ghost" id="userMenuBtn" style="display: flex; align-items: center; gap: var(--space-2);">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">User</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="./profile.html" class="dropdown-item">
+                            <span>👤</span> Profil
+                        </a>
+                        <a href="./dashboard.html" class="dropdown-item">
+                            <span>📊</span> Dashboard
+                        </a>
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-2) 0;">
+                        <button onclick="logout()" class="dropdown-item" style="color: var(--error);">
+                            <span>🚪</span> Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5rem; padding: var(--space-8);">
+        <div class="content-wrapper">
+            <h1 class="page-title" style="margin-bottom: var(--space-6);">📦 Pesanan Saya</h1>
+
+            <!-- Order Tabs -->
+            <div class="order-tabs" style="display: flex; gap: var(--space-2); margin-bottom: var(--space-6); border-bottom: 2px solid var(--gray-200);">
+                <button class="tab-btn active" onclick="filterOrders('all')">Semua</button>
+                <button class="tab-btn" onclick="filterOrders('pending')">Menunggu Pembayaran</button>
+                <button class="tab-btn" onclick="filterOrders('processing')">Diproses</button>
+                <button class="tab-btn" onclick="filterOrders('shipped')">Dikirim</button>
+                <button class="tab-btn" onclick="filterOrders('completed')">Selesai</button>
+            </div>
+
+            <!-- Orders List -->
+            <div class="orders-container" id="ordersList">
+                <!-- Dynamic orders -->
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/customer-orders.js"></script>
+</body>
+</html>

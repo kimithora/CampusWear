@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelajahi Produk - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="./dashboard.html" class="nav-link">Dashboard</a>
+                <a href="./browse.html" class="nav-link active">Jelajahi</a>
+                <a href="./orders.html" class="nav-link">Pesanan</a>
+                <a href="./ai-coloring.html" class="nav-link">AI Style</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="./cart.html" class="btn btn-ghost btn-sm" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <div class="user-menu">
+                    <button class="btn btn-ghost" id="userMenuBtn" style="display: flex; align-items: center; gap: var(--space-2);">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">User</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="./profile.html" class="dropdown-item">
+                            <span>👤</span> Profil
+                        </a>
+                        <a href="./dashboard.html" class="dropdown-item">
+                            <span>📊</span> Dashboard
+                        </a>
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-2) 0;">
+                        <button onclick="logout()" class="dropdown-item" style="color: var(--error);">
+                            <span>🚪</span> Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5rem; padding: var(--space-8);">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="page-header" style="margin-bottom: var(--space-6);">
+                <h1 class="page-title">🔍 Jelajahi Katalog</h1>
+                <p class="page-subtitle">Temukan pakaian preloved berkualitas dari sesama mahasiswa</p>
+            </div>
+
+            <!-- Search & Filter Bar -->
+            <div class="filter-bar" style="background: var(--white); padding: var(--space-6); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); margin-bottom: var(--space-6);">
+                <div class="grid" style="grid-template-columns: 2fr 1fr 1fr auto; gap: var(--space-4); align-items: end;">
+                    <div class="form-group" style="margin: 0;">
+                        <label class="form-label">Cari Produk</label>
+                        <div class="input-group">
+                            <span class="input-icon">🔍</span>
+                            <input type="text" class="form-input" id="searchInput" placeholder="Cari kemeja, hoodie, celana...">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label class="form-label">Kategori</label>
+                        <select class="form-select" id="categoryFilter">
+                            <option value="">Semua Kategori</option>
+                            <option value="kaos">Kaos</option>
+                            <option value="kemeja">Kemeja</option>
+                            <option value="celana">Celana</option>
+                            <option value="jaket">Jaket</option>
+                            <option value="hoodie">Hoodie</option>
+                            <option value="aksesoris">Aksesoris</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin: 0;">
+                        <label class="form-label">Urutkan</label>
+                        <select class="form-select" id="sortFilter">
+                            <option value="newest">Terbaru</option>
+                            <option value="price-low">Harga: Rendah ke Tinggi</option>
+                            <option value="price-high">Harga: Tinggi ke Rendah</option>
+                            <option value="popular">Paling Populer</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="applyFilters()">
+                        Filter
+                    </button>
+                </div>
+
+                <!-- Active Filters -->
+                <div class="active-filters" id="activeFilters" style="margin-top: var(--space-4); display: flex; gap: var(--space-2); flex-wrap: wrap;">
+                    <!-- Dynamic filters -->
+                </div>
+            </div>
+
+            <!-- Results Count -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                <p style="color: var(--gray-600);"><span id="resultCount">0</span> produk ditemukan</p>
+                <div class="view-toggle">
+                    <button class="btn btn-sm btn-ghost active" onclick="setView('grid')">⊞ Grid</button>
+                    <button class="btn btn-sm btn-ghost" onclick="setView('list')">☰ List</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="product-grid" id="productsGrid">
+                <!-- Dynamic products -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination" style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-8);">
+                <!-- Dynamic pagination -->
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/customer-browse.js"></script>
+</body>
+</html>

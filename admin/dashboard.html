@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link active">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Header -->
+        <header class="admin-header">
+            <h1>Dashboard Admin</h1>
+            <div class="header-actions">
+                <div class="notification-bell" style="position: relative;">
+                    🔔
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="adminAvatar">A</div>
+                    <span id="adminName">Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="admin-content">
+            <!-- Stats Overview -->
+            <div class="admin-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); margin-bottom: var(--space-8);">
+                <div class="stat-card highlight">
+                    <div class="stat-icon" style="background: var(--primary-100); color: var(--primary-600);">💰</div>
+                    <div>
+                        <div class="stat-label">Total Penjualan</div>
+                        <div class="stat-value" id="totalSales">Rp 0</div>
+                        <div class="stat-change positive">↑ 12% dari bulan lalu</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: var(--success); color: white;">📦</div>
+                    <div>
+                        <div class="stat-label">Consignment Aktif</div>
+                        <div class="stat-value" id="activeConsignments">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: var(--warning); color: white;">⏳</div>
+                    <div>
+                        <div class="stat-label">Menunggu Proses</div>
+                        <div class="stat-value" id="pendingProcessing">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: var(--secondary-500); color: white;">🎯</div>
+                    <div>
+                        <div class="stat-label">AI Scanned</div>
+                        <div class="stat-value" id="aiScanned">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card" style="margin-bottom: var(--space-8);">
+                <div class="card-header">
+                    <h3>⚡ Aksi Cepat</h3>
+                </div>
+                <div class="card-body">
+                    <div class="quick-actions" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4);">
+                        <a href="consigment.html" class="quick-action-card">
+                            <span>📥</span>
+                            <span>Terima Consignment</span>
+                        </a>
+                        <a href="processing.html" class="quick-action-card">
+                            <span>🔍</span>
+                            <span>QC & Laundry</span>
+                        </a>
+                        <a href="digitalization.html" class="quick-action-card">
+                            <span>📷</span>
+                            <span>Foto Produk</span>
+                        </a>
+                        <a href="sales.html" class="quick-action-card">
+                            <span>📋</span>
+                            <span>Lihat Penjualan</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Consignments -->
+            <div class="grid grid-2" style="gap: var(--space-6); margin-bottom: var(--space-8);">
+                <div class="card">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>📦 Consignment Terbaru</h3>
+                        <a href="consigment.html" class="btn btn-ghost btn-sm">Lihat Semua</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Penjual</th>
+                                        <th>Item</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentConsignments">
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; padding: var(--space-8); color: var(--gray-500);">
+                                            Tidak ada data consignment
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>⚠️ Perlu Perhatian</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert-list">
+                            <div class="alert-item warning">
+                                <span>⚠️</span>
+                                <div>
+                                    <strong>5 item</strong> menunggu QC
+                                    <a href="processing.html">Proses sekarang →</a>
+                                </div>
+                            </div>
+                            <div class="alert-item info">
+                                <span>ℹ️</span>
+                                <div>
+                                    <strong>3 item</strong> perlu foto studio
+                                    <a href="digitalization.html">Lihat detail →</a>
+                                </div>
+                            </div>
+                            <div class="alert-item success">
+                                <span>✓</span>
+                                <div>
+                                    <strong>12 settlement</strong> siap dibayar
+                                    <a href="settlement.html">Proses →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>📈 Grafik Penjualan (7 Hari Terakhir)</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="height: 300px; background: var(--gray-50); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--gray-400);">
+                        [Chart Placeholder - Integrasi dengan Chart.js di masa depan]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-dashboard.js"></script>
+</body>
+</html>

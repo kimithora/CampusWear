@@ -1,0 +1,304 @@
+/* ============================================
+   CAMPUSWEAR - AUTH CSS
+   Styling untuk Login & Register
+   ============================================ */
+
+.auth-page {
+    min-height: 100vh;
+    background: var(--gray-50);
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+/* Left Side - Illustration */
+.auth-left {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-700), var(--primary-800));
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-8);
+    overflow: hidden;
+}
+
+.auth-left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.auth-brand {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 800;
+}
+
+.auth-brand .brand-icon {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.auth-illustration {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12);
+}
+
+.illustration-content {
+    color: var(--white);
+    max-width: 480px;
+}
+
+.illustration-content h2 {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: var(--space-4);
+    line-height: 1.2;
+}
+
+.illustration-content p {
+    font-size: var(--text-lg);
+    color: var(--primary-100);
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+}
+
+.feature-check {
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+}
+
+.stats-highlight {
+    display: flex;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat strong {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--white);
+}
+
+.stat span {
+    font-size: var(--text-sm);
+    color: var(--primary-200);
+}
+
+/* Right Side - Form */
+.auth-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+    background: var(--white);
+}
+
+.auth-form-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.auth-header h1 {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: var(--space-2);
+}
+
+.auth-header p {
+    color: var(--gray-500);
+}
+
+.auth-header a {
+    color: var(--primary-600);
+    font-weight: 600;
+}
+
+.auth-header a:hover {
+    color: var(--primary-700);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: var(--text-sm);
+    color: var(--primary-600);
+    margin-top: var(--space-2);
+}
+
+.forgot-password:hover {
+    color: var(--primary-700);
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+    color: var(--gray-400);
+    font-size: var(--text-sm);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--gray-200);
+}
+
+.social-login {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.auth-footer {
+    margin-top: var(--space-8);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--gray-500);
+}
+
+.auth-footer a {
+    color: var(--primary-600);
+}
+
+/* Role Selection */
+.role-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.role-card {
+    position: relative;
+    padding: var(--space-6);
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.role-card:hover {
+    border-color: var(--primary-300);
+}
+
+.role-card.active {
+    border-color: var(--primary-500);
+    background: var(--primary-50);
+}
+
+.role-card input {
+    position: absolute;
+    opacity: 0;
+}
+
+.role-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-3);
+    background: var(--gray-100);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+    transition: all var(--transition-base);
+}
+
+.role-card.active .role-icon {
+    background: var(--primary-500);
+    color: var(--white);
+}
+
+.role-title {
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: var(--space-1);
+}
+
+.role-description {
+    font-size: var(--text-xs);
+    color: var(--gray-500);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-left {
+        display: none;
+    }
+    
+    .auth-right {
+        padding: var(--space-6);
+    }
+}
+
+@media (max-width: 480px) {
+    .social-login {
+        flex-direction: column;
+    }
+    
+    .role-selection {
+        grid-template-columns: 1fr;
+    }
+}

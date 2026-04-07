@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body>
+    <!-- Simple Header -->
+    <header style="background: var(--white); border-bottom: 1px solid var(--gray-200); padding: var(--space-4) 0;">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" style="padding: var(--space-8) 0;">
+        <div class="content-wrapper container-narrow">
+            <!-- Progress Steps -->
+            <div class="checkout-steps" style="display: flex; justify-content: center; gap: var(--space-8); margin-bottom: var(--space-8);">
+                <div class="step active" style="text-align: center;">
+                    <div style="width: 40px; height: 40px; background: var(--primary-600); color: white; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-2); font-weight: 700;">1</div>
+                    <span style="font-size: var(--text-sm); color: var(--primary-600); font-weight: 600;">Pengiriman</span>
+                </div>
+                <div style="width: 60px; height: 2px; background: var(--gray-200); margin-top: 20px;"></div>
+                <div class="step" style="text-align: center;">
+                    <div style="width: 40px; height: 40px; background: var(--gray-200); color: var(--gray-500); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-2); font-weight: 700;">2</div>
+                    <span style="font-size: var(--text-sm); color: var(--gray-500);">Pembayaran</span>
+                </div>
+                <div style="width: 60px; height: 2px; background: var(--gray-200); margin-top: 20px;"></div>
+                <div class="step" style="text-align: center;">
+                    <div style="width: 40px; height: 40px; background: var(--gray-200); color: var(--gray-500); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-2); font-weight: 700;">3</div>
+                    <span style="font-size: var(--text-sm); color: var(--gray-500);">Konfirmasi</span>
+                </div>
+            </div>
+
+            <div class="checkout-layout" style="display: grid; grid-template-columns: 1fr 400px; gap: var(--space-8);">
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <!-- Shipping Address -->
+                    <div class="card" style="margin-bottom: var(--space-6);">
+                        <div class="card-header">
+                            <h3>📍 Alamat Pengiriman</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="shippingForm">
+                                <div class="grid grid-2" style="gap: var(--space-4);">
+                                    <div class="form-group">
+                                        <label class="form-label form-label-required">Nama Lengkap</label>
+                                        <input type="text" class="form-input" id="shippingName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label form-label-required">No. Telepon</label>
+                                        <input type="tel" class="form-input" id="shippingPhone" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label form-label-required">Alamat Lengkap</label>
+                                    <textarea class="form-textarea" id="shippingAddress" rows="3" required placeholder="Nama jalan, nomor rumah, RT/RW..."></textarea>
+                                </div>
+                                <div class="grid grid-3" style="gap: var(--space-4);">
+                                    <div class="form-group">
+                                        <label class="form-label form-label-required">Kota</label>
+                                        <input type="text" class="form-input" id="shippingCity" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label form-label-required">Kode Pos</label>
+                                        <input type="text" class="form-input" id="shippingPostal" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label form-label-required">Provinsi</label>
+                                        <select class="form-select" id="shippingProvince" required>
+                                            <option value="">Pilih</option>
+                                            <option value="DKI Jakarta">DKI Jakarta</option>
+                                            <option value="Jawa Barat">Jawa Barat</option>
+                                            <option value="Jawa Tengah">Jawa Tengah</option>
+                                            <option value="Jawa Timur">Jawa Timur</option>
+                                            <option value="DI Yogyakarta">DI Yogyakarta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Method -->
+                    <div class="card" style="margin-bottom: var(--space-6);">
+                        <div class="card-header">
+                            <h3>🚚 Metode Pengiriman</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="shipping-options">
+                                <label class="shipping-option" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4); border: 2px solid var(--primary-500); border-radius: var(--radius-lg); cursor: pointer; margin-bottom: var(--space-3);">
+                                    <input type="radio" name="shipping" value="jne" checked style="width: 20px; height: 20px;">
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700;">JNE Reguler</div>
+                                        <div style="font-size: var(--text-sm); color: var(--gray-500);">Estimasi 3-5 hari kerja</div>
+                                    </div>
+                                    <div style="font-weight: 700;">Rp 20.000</div>
+                                </label>
+                                <label class="shipping-option" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); cursor: pointer;">
+                                    <input type="radio" name="shipping" value="jnt" style="width: 20px; height: 20px;">
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700;">J&T Express</div>
+                                        <div style="font-size: var(--text-sm); color: var(--gray-500);">Estimasi 2-3 hari kerja</div>
+                                    </div>
+                                    <div style="font-weight: 700;">Rp 25.000</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>💳 Metode Pembayaran</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="payment-options">
+                                <label class="payment-option" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4); border: 2px solid var(--primary-500); border-radius: var(--radius-lg); cursor: pointer; margin-bottom: var(--space-3);">
+                                    <input type="radio" name="payment" value="transfer" checked style="width: 20px; height: 20px;">
+                                    <span style="font-size: var(--text-2xl);">🏦</span>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700;">Transfer Bank</div>
+                                        <div style="font-size: var(--text-sm); color: var(--gray-500);">BCA, Mandiri, BNI</div>
+                                    </div>
+                                </label>
+                                <label class="payment-option" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); cursor: pointer; margin-bottom: var(--space-3);">
+                                    <input type="radio" name="payment" value="ewallet" style="width: 20px; height: 20px;">
+                                    <span style="font-size: var(--text-2xl);">📱</span>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700;">E-Wallet</div>
+                                        <div style="font-size: var(--text-sm); color: var(--gray-500);">GoPay, OVO, DANA</div>
+                                    </div>
+                                </label>
+                                <label class="payment-option" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-4); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); cursor: pointer;">
+                                    <input type="radio" name="payment" value="cod" style="width: 20px; height: 20px;">
+                                    <span style="font-size: var(--text-2xl);">💵</span>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 700;">COD (Bayar di Tempat)</div>
+                                        <div style="font-size: var(--text-sm); color: var(--gray-500);">Tambahan biaya Rp 5.000</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="card" style="position: sticky; top: 2rem;">
+                        <div class="card-header">
+                            <h3>Ringkasan Pesanan</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Cart Items Summary -->
+                            <div id="checkoutItems" style="margin-bottom: var(--space-6);">
+                                <!-- Dynamic items -->
+                            </div>
+
+                            <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-4) 0;">
+
+                            <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                                <span>Subtotal</span>
+                                <span id="checkoutSubtotal">Rp 0</span>
+                            </div>
+                            <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                                <span>Ongkir</span>
+                                <span id="checkoutShipping">Rp 20.000</span>
+                            </div>
+                            <div class="summary-row" style="display: flex; justify-content: space-between; margin-bottom: var(--space-3); color: var(--success);">
+                                <span>Diskon</span>
+                                <span id="checkoutDiscount">- Rp 0</span>
+                            </div>
+                            <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-4) 0;">
+                            <div class="summary-row" style="display: flex; justify-content: space-between; font-size: var(--text-xl); font-weight: 700;">
+                                <span>Total</span>
+                                <span id="checkoutTotal" style="color: var(--primary-600);">Rp 0</span>
+                            </div>
+
+                            <button onclick="placeOrder()" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-6);">
+                                Bayar Sekarang
+                            </button>
+
+                            <p style="text-align: center; font-size: var(--text-sm); color: var(--gray-500); margin-top: var(--space-4);">
+                                🔒 Pembayaran aman & terenkripsi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>    <script src="../assets/js/cart.js"></script>
+    <script src="../assets/js/customer-checkout.js"></script>
+</body>
+</html>

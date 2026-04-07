@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="./dashboard.html" class="nav-link">Dashboard</a>
+                <a href="./browse.html" class="nav-link">Jelajahi</a>
+                <a href="./orders.html" class="nav-link">Pesanan</a>
+                <a href="./ai-coloring.html" class="nav-link">AI Style</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="./cart.html" class="btn btn-ghost btn-sm" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <div class="user-menu">
+                    <button class="btn btn-ghost" id="userMenuBtn" style="display: flex; align-items: center; gap: var(--space-2);">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">User</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="./profile.html" class="dropdown-item">
+                            <span>👤</span> Profil
+                        </a>
+                        <a href="./dashboard.html" class="dropdown-item">
+                            <span>📊</span> Dashboard
+                        </a>
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-2) 0;">
+                        <button onclick="logout()" class="dropdown-item" style="color: var(--error);">
+                            <span>🚪</span> Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5rem; padding: var(--space-8);">
+        <div class="content-wrapper container-narrow">
+            <div class="page-header">
+                <h1 class="page-title">👤 Profil Saya</h1>
+                <p class="page-subtitle">Kelola informasi personal dan preferensimu</p>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card-body" style="text-align: center; padding: var(--space-8);">
+                    <div class="profile-avatar-large" id="profileAvatar" style="margin: 0 auto var(--space-4);">
+                        U
+                    </div>
+                    <h2 id="profileName" style="margin-bottom: var(--space-2);">User Name</h2>
+                    <p id="profileEmail" style="color: var(--gray-500); margin-bottom: var(--space-2);">email@example.com</p>
+                    <div id="profileBadge" style="display: none;">
+                        <span class="badge badge-primary">⭐ Premium Member</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Profile Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 style="font-size: var(--text-lg);">Edit Profil</h3>
+                </div>
+                <div class="card-body">
+                    <form id="profileForm">
+                        <div class="grid grid-2" style="gap: var(--space-4);">
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Nama Lengkap</label>
+                                <input type="text" class="form-input" id="editName" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Email</label>
+                                <input type="email" class="form-input" id="editEmail" required disabled style="background: var(--gray-100);">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-2" style="gap: var(--space-4);">
+                            <div class="form-group">
+                                <label class="form-label form-label-required">No. Telepon</label>
+                                <input type="tel" class="form-input" id="editPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Kampus</label>
+                                <select class="form-select" id="editCampus" required>
+                                    <option value="Universitas Indonesia">Universitas Indonesia</option>
+                                    <option value="Institut Teknologi Bandung">Institut Teknologi Bandung</option>
+                                    <option value="Universitas Gadjah Mada">Universitas Gadjah Mada</option>
+                                    <option value="Universitas Padjadjaran">Universitas Padjadjaran</option>
+                                    <option value="IPB University">IPB University</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Alamat Pengiriman</label>
+                            <textarea class="form-textarea" id="editAddress" placeholder="Masukkan alamat lengkap untuk pengiriman..."></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: var(--space-4); justify-content: flex-end; margin-top: var(--space-6);">
+                            <button type="button" class="btn btn-ghost" onclick="window.location.reload()">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Change Password -->
+            <div class="card" style="margin-top: var(--space-6);">
+                <div class="card-header">
+                    <h3 style="font-size: var(--text-lg);">🔒 Ganti Password</h3>
+                </div>
+                <div class="card-body">
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label class="form-label form-label-required">Password Saat Ini</label>
+                            <input type="password" class="form-input" id="currentPassword" required>
+                        </div>
+                        <div class="grid grid-2" style="gap: var(--space-4);">
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Password Baru</label>
+                                <input type="password" class="form-input" id="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label form-label-required">Konfirmasi Password Baru</label>
+                                <input type="password" class="form-input" id="confirmNewPassword" required>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; margin-top: var(--space-4);">
+                            <button type="submit" class="btn btn-secondary">Ganti Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Account Actions -->
+            <div class="card" style="margin-top: var(--space-6); border-color: var(--error);">
+                <div class="card-body" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="color: var(--error); margin-bottom: var(--space-1);">⚠️ Zona Berbahaya</h4>
+                        <p style="font-size: var(--text-sm); color: var(--gray-500);">Tindakan ini tidak dapat dibatalkan</p>
+                    </div>
+                    <button class="btn btn-danger" onclick="confirmDeleteAccount()">Hapus Akun</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/customer-profile.js"></script>
+</body>
+</html>

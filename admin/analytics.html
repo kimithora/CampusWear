@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link active">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>📈 Analytics & Reports</h1>
+            <div class="header-actions">
+                <select class="form-select" id="periodFilter" onchange="updateAnalytics()">
+                    <option value="7days">7 Hari Terakhir</option>
+                    <option value="30days">30 Hari Terakhir</option>
+                    <option value="thisMonth">Bulan Ini</option>
+                    <option value="lastMonth">Bulan Lalu</option>
+                </select>
+                <button class="btn btn-secondary" onclick="exportReport()">
+                    📥 Export Report
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- Key Metrics -->
+            <div class="admin-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); margin-bottom: var(--space-6);">
+                <div class="stat-card">
+                    <div class="stat-label">Revenue</div>
+                    <div class="stat-value" id="analyticsRevenue">Rp 0</div>
+                    <div class="stat-change positive">↑ 15%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Orders</div>
+                    <div class="stat-value" id="analyticsOrders">0</div>
+                    <div class="stat-change positive">↑ 8%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">New Consignments</div>
+                    <div class="stat-value" id="analyticsConsignments">0</div>
+                    <div class="stat-change negative">↓ 3%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Users</div>
+                    <div class="stat-value" id="analyticsUsers">0</div>
+                    <div class="stat-change positive">↑ 22%</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid grid-2" style="gap: var(--space-6); margin-bottom: var(--space-6);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📊 Revenue Trend</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-placeholder" style="height: 250px; background: var(--gray-50); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--gray-400);">
+                            [Revenue Chart]
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🥧 Sales by Category</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-placeholder" style="height: 250px; background: var(--gray-50); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--gray-400);">
+                            [Category Pie Chart]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Performance -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card-header">
+                    <h3>🤖 AI Performance Metrics</h3>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6);">
+                        <div class="metric-box" style="text-align: center; padding: var(--space-6); background: var(--gray-50); border-radius: var(--radius-xl);">
+                            <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--primary-600);">12,450</div>
+                            <div style="color: var(--gray-600);">Total AI Scans</div>
+                        </div>
+                        <div class="metric-box" style="text-align: center; padding: var(--space-6); background: var(--gray-50); border-radius: var(--radius-xl);">
+                            <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--success);">89%</div>
+                            <div style="color: var(--gray-600);">Match Accuracy</div>
+                        </div>
+                        <div class="metric-box" style="text-align: center; padding: var(--space-6); background: var(--gray-50); border-radius: var(--radius-xl);">
+                            <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--secondary-600);">2.5x</div>
+                            <div style="color: var(--gray-600);">Conversion Boost</div>
+                        </div>
+                        <div class="metric-box" style="text-align: center; padding: var(--space-6); background: var(--gray-50); border-radius: var(--radius-xl);">
+                            <div style="font-size: var(--text-3xl); font-weight: 800; color: var(--warning);">4.8★</div>
+                            <div style="color: var(--gray-600);">User Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Performing -->
+            <div class="grid grid-2" style="gap: var(--space-6);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🏆 Top Sellers</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="top-list">
+                            <div class="top-item" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--gray-100);">
+                                <div style="width: 40px; height: 40px; background: var(--primary-100); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary-600);">1</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Budi Santoso</div>
+                                    <div style="font-size: var(--text-sm); color: var(--gray-500);">UI - 45 items sold</div>
+                                </div>
+                                <div style="font-weight: 700;">Rp 2.5M</div>
+                            </div>
+                            <div class="top-item" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--gray-100);">
+                                <div style="width: 40px; height: 40px; background: var(--gray-100); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--gray-600);">2</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Ani Wijaya</div>
+                                    <div style="font-size: var(--text-sm); color: var(--gray-500);">ITB - 32 items sold</div>
+                                </div>
+                                <div style="font-weight: 700;">Rp 1.8M</div>
+                            </div>
+                            <div class="top-item" style="display: flex; align-items: center; gap: var(--space-4); padding: var(--space-3) 0;">
+                                <div style="width: 40px; height: 40px; background: var(--gray-100); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--gray-600);">3</div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Dewi Kusuma</div>
+                                    <div style="font-size: var(--text-sm); color: var(--gray-500);">UGM - 28 items sold</div>
+                                </div>
+                                <div style="font-weight: 700;">Rp 1.5M</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📍 Sales by Campus</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="campus-list">
+                            <div class="campus-item" style="margin-bottom: var(--space-4);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <span>Universitas Indonesia</span>
+                                    <span style="font-weight: 600;">35%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                    <div style="width: 35%; height: 100%; background: var(--primary-500); border-radius: var(--radius-full);"></div>
+                                </div>
+                            </div>
+                            <div class="campus-item" style="margin-bottom: var(--space-4);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <span>IT Bandung</span>
+                                    <span style="font-weight: 600;">28%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                    <div style="width: 28%; height: 100%; background: var(--secondary-500); border-radius: var(--radius-full);"></div>
+                                </div>
+                            </div>
+                            <div class="campus-item" style="margin-bottom: var(--space-4);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <span>Universitas Gadjah Mada</span>
+                                    <span style="font-weight: 600;">20%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                    <div style="width: 20%; height: 100%; background: var(--accent-cyan); border-radius: var(--radius-full);"></div>
+                                </div>
+                            </div>
+                            <div class="campus-item">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <span>Lainnya</span>
+                                    <span style="font-weight: 600;">17%</span>
+                                </div>
+                                <div style="height: 8px; background: var(--gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                                    <div style="width: 17%; height: 100%; background: var(--gray-400); border-radius: var(--radius-full);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-analytics.js"></script>
+</body>
+</html>

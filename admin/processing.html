@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link active">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>✨ Processing Center</h1>
+            <p style="color: var(--gray-500);">QC, Laundry, dan AI Scanning</p>
+        </header>
+
+        <div class="admin-content">
+            <!-- Processing Pipeline -->
+            <div class="pipeline-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); margin-bottom: var(--space-8);">
+                <div class="pipeline-card">
+                    <div class="pipeline-header">
+                        <span>🔍</span>
+                        <h3>Quality Control</h3>
+                        <span class="pipeline-count" id="qcCount">0</span>
+                    </div>
+                    <div class="pipeline-body" id="qcList">
+                        <!-- QC Items -->
+                    </div>
+                </div>
+                
+                <div class="pipeline-card">
+                    <div class="pipeline-header">
+                        <span>🧺</span>
+                        <h3>Laundry</h3>
+                        <span class="pipeline-count" id="laundryCount">0</span>
+                    </div>
+                    <div class="pipeline-body" id="laundryList">
+                        <!-- Laundry Items -->
+                    </div>
+                </div>
+                
+                <div class="pipeline-card">
+                    <div class="pipeline-header">
+                        <span>🤖</span>
+                        <h3>AI Scanning</h3>
+                        <span class="pipeline-count" id="aiCount">0</span>
+                    </div>
+                    <div class="pipeline-body" id="aiList">
+                        <!-- AI Items -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Table -->
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>📋 Daftar Item dalam Proses</h3>
+                    <div style="display: flex; gap: var(--space-3);">
+                        <select class="form-select" id="processFilter" onchange="filterProcessing()">
+                            <option value="all">Semua Proses</option>
+                            <option value="qc">QC Pending</option>
+                            <option value="laundry">Laundry</option>
+                            <option value="ai">AI Scanning</option>
+                            <option value="completed">Selesai</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Penjual</th>
+                                    <th>Status Proses</th>
+                                    <th>QC Result</th>
+                                    <th>AI Tags</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="processingTable">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- QC Modal -->
+    <div class="modal-overlay" id="qcModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>🔍 Quality Control Check</h3>
+                <button class="modal-close" onclick="closeModal('qcModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="qcItemDetails" style="margin-bottom: var(--space-6);">
+                    <!-- Item details -->
+                </div>
+                
+                <form id="qcForm">
+                    <div class="form-group">
+                        <label class="form-label">Kondisi Fisik</label>
+                        <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+                            <label class="radio-card">
+                                <input type="radio" name="qcCondition" value="excellent" checked>
+                                <span>Excellent</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="qcCondition" value="good">
+                                <span>Good</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="qcCondition" value="fair">
+                                <span>Fair</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="qcCondition" value="reject">
+                                <span style="color: var(--error);">Reject</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Catatan QC</label>
+                        <textarea class="form-textarea" id="qcNotes" placeholder="Tambahkan catatan tentang kondisi item..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Defects (jika ada)</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+                            <label class="checkbox-tag">
+                                <input type="checkbox" value="fading"> Fading
+                            </label>
+                            <label class="checkbox-tag">
+                                <input type="checkbox" value="tear"> Tear
+                            </label>
+                            <label class="checkbox-tag">
+                                <input type="checkbox" value="stain"> Stain
+                            </label>
+                            <label class="checkbox-tag">
+                                <input type="checkbox" value="pilling"> Pilling
+                            </label>
+                            <label class="checkbox-tag">
+                                <input type="checkbox" value="loose_thread"> Loose Thread
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('qcModal')">Batal</button>
+                <button class="btn btn-primary" onclick="submitQC()">Lanjut ke Laundry</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Scan Modal -->
+    <div class="modal-overlay" id="aiScanModal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3>🤖 AI Color & Style Scanning</h3>
+                <button class="modal-close" onclick="closeModal('aiScanModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+                    <div>
+                        <div id="aiItemPreview" style="background: var(--gray-100); aspect-ratio: 1; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-4);">
+                            👕
+                        </div>
+                        <h4 id="aiItemName">Nama Item</h4>
+                    </div>
+                    <div>
+                        <div class="ai-scanning-animation" style="text-align: center; padding: var(--space-8);">
+                            <div class="scan-line" style="width: 100%; height: 2px; background: var(--primary-500); position: relative; animation: scan 2s infinite;"></div>
+                            <p style="margin-top: var(--space-4); color: var(--gray-600);">AI sedang menganalisis warna dan gaya...</p>
+                        </div>
+                        
+                        <div id="aiResults" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">Warna Dominan</label>
+                                <div style="display: flex; gap: var(--space-3); align-items: center;">
+                                    <div id="dominantColor" style="width: 50px; height: 50px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);"></div>
+                                    <input type="text" class="form-input" id="colorName" placeholder="Nama warna">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">AI Tags</label>
+                                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+                                    <label class="checkbox-tag"><input type="checkbox" value="casual"> Casual</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="formal"> Formal</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="vintage"> Vintage</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="streetwear"> Streetwear</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="minimalist"> Minimalist</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="warm-tone"> Warm Tone</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="cool-tone"> Cool Tone</label>
+                                    <label class="checkbox-tag"><input type="checkbox" value="earth-tone"> Earth Tone</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('aiScanModal')">Batal</button>
+                <button class="btn btn-primary" onclick="startAIScan()" id="startScanBtn">Mulai Scan</button>
+                <button class="btn btn-primary" onclick="saveAIResults()" id="saveResultsBtn" style="display: none;">Simpan & Lanjut</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-processing.js"></script>
+</body>
+</html>

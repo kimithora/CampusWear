@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consignment - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link active">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>📦 Consignment Management</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="openNewConsignmentModal()">
+                    <span>+</span> Tambah Consignment
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- Filter Tabs -->
+            <div class="filter-tabs" style="display: flex; gap: var(--space-2); margin-bottom: var(--space-6); border-bottom: 2px solid var(--gray-200);">
+                <button class="tab-btn active" onclick="filterConsignments('all')">Semua</button>
+                <button class="tab-btn" onclick="filterConsignments('pending')">Menunggu</button>
+                <button class="tab-btn" onclick="filterConsignments('processing')">Diproses</button>
+                <button class="tab-btn" onclick="filterConsignments('completed')">Selesai</button>
+                <button class="tab-btn" onclick="filterConsignments('rejected')">Ditolak</button>
+            </div>
+
+            <!-- Consignments Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Consignment</th>
+                                    <th>Tanggal</th>
+                                    <th>Penjual</th>
+                                    <th>Item</th>
+                                    <th>Estimasi Nilai</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="consignmentsTable">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Consignment Modal -->
+    <div class="modal-overlay" id="newConsignmentModal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3>Tambah Consignment Baru</h3>
+                <button class="modal-close" onclick="closeModal('newConsignmentModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="consignmentForm">
+                    <div class="form-group">
+                        <label class="form-label form-label-required">Pilih Penjual</label>
+                        <select class="form-select" id="consignmentSeller" required>
+                            <option value="">Pilih penjual...</option>
+                        </select>
+                    </div>
+                    
+                    <div id="itemsContainer">
+                        <div class="consignment-item" style="background: var(--gray-50); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-4);">
+                            <div class="grid grid-3" style="gap: var(--space-4);">
+                                <div class="form-group">
+                                    <label class="form-label">Nama Item</label>
+                                    <input type="text" class="form-input item-name" placeholder="Contoh: Kemeja Flannel" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Kategori</label>
+                                    <select class="form-select item-category" required>
+                                        <option value="kaos">Kaos</option>
+                                        <option value="kemeja">Kemeja</option>
+                                        <option value="celana">Celana</option>
+                                        <option value="jaket">Jaket</option>
+                                        <option value="hoodie">Hoodie</option>
+                                        <option value="aksesoris">Aksesoris</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Estimasi Harga</label>
+                                    <input type="number" class="form-input item-price" placeholder="150000" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: var(--space-4);">
+                                <label class="form-label">Kondisi</label>
+                                <select class="form-select item-condition">
+                                    <option value="Like New">Like New (95-100%)</option>
+                                    <option value="Sangat Baik">Sangat Baik (85-94%)</option>
+                                    <option value="Baik">Baik (70-84%)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="addItemField()" style="margin-bottom: var(--space-4);">
+                        + Tambah Item Lain
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('newConsignmentModal')">Batal</button>
+                <button class="btn btn-primary" onclick="submitConsignment()">Simpan Consignment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Detail Consignment</h3>
+                <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+            </div>
+            <div class="modal-body" id="detailContent">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-consignment.js"></script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+[
+  {
+    "id": 1,
+    "username": "john_doe",
+    "email": "john.doe@student.univ.ac.id",
+    "password": "$2b$10$hashedpassword1",
+    "role": "customer",
+    "isPremium": true,
+    "profile": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "fullName": "John Doe",
+      "phone": "+6281234567890",
+      "dateOfBirth": "2000-05-15",
+      "gender": "male",
+      "university": "Universitas Indonesia",
+      "major": "Computer Science",
+      "semester": 6,
+      "address": {
+        "street": "Jl. Margonda Raya No. 100",
+        "city": "Depok",
+        "province": "Jawa Barat",
+        "postalCode": "16424",
+        "country": "Indonesia"
+      }
+    },
+    "skinAnalysis": {
+      "skinTone": "Warm",
+      "undertone": "Golden",
+      "season": "Autumn",
+      "colorPalette": ["#8B4513", "#FF6347", "#FFD700", "#DC143C", "#8A2BE2"],
+      "recommendedColors": ["#8B4513", "#FF6347", "#FFD700", "#DC143C", "#8A2BE2"],
+      "avoidColors": ["#808080", "#000000", "#FFFFFF"],
+      "lastAnalysis": "2024-12-01T10:30:00Z"
+    },
+    "preferences": {
+      "stylePreferences": ["Casual", "Streetwear", "Minimalist"],
+      "sizePreferences": {
+        "top": "M",
+        "bottom": "L",
+        "shoes": "42"
+      },
+      "colorPreferences": ["Black", "White", "Navy", "Gray"],
+      "priceRange": {
+        "min": 50000,
+        "max": 300000
+      }
+    },
+    "orders": [
+      {
+        "orderId": "ORD-2024-001",
+        "date": "2024-11-15T14:20:00Z",
+        "status": "delivered",
+        "total": 285000,
+        "items": [
+          {
+            "productId": 1,
+            "name": "Campus Hoodie Navy",
+            "quantity": 1,
+            "price": 150000,
+            "size": "M"
+          },
+          {
+            "productId": 3,
+            "name": "Slim Fit Jeans Black",
+            "quantity": 1,
+            "price": 135000,
+            "size": "L"
+          }
+        ]
+      },
+      {
+        "orderId": "ORD-2024-002",
+        "date": "2024-12-01T09:15:00Z",
+        "status": "processing",
+        "total": 89000,
+        "items": [
+          {
+            "productId": 5,
+            "name": "White Sneakers",
+            "quantity": 1,
+            "price": 89000,
+            "size": "42"
+          }
+        ]
+      }
+    ],
+    "cart": [
+      {
+        "productId": 7,
+        "name": "Graphic T-Shirt",
+        "quantity": 2,
+        "price": 75000,
+        "size": "M"
+      }
+    ],
+    "wishlist": [2, 4, 8, 12],
+    "stats": {
+      "totalOrders": 2,
+      "totalSpent": 374000,
+      "memberSince": "2024-03-01T00:00:00Z",
+      "lastLogin": "2024-12-03T16:45:00Z"
+    },
+    "notifications": {
+      "emailNotifications": true,
+      "smsNotifications": false,
+      "orderUpdates": true,
+      "promotions": true
+    }
+  },
+  {
+    "id": 2,
+    "username": "sarah_wilson",
+    "email": "sarah.wilson@student.univ.ac.id",
+    "password": "$2b$10$hashedpassword2",
+    "role": "customer",
+    "isPremium": false,
+    "profile": {
+      "firstName": "Sarah",
+      "lastName": "Wilson",
+      "fullName": "Sarah Wilson",
+      "phone": "+6289876543210",
+      "dateOfBirth": "2001-08-22",
+      "gender": "female",
+      "university": "Universitas Gadjah Mada",
+      "major": "Business Administration",
+      "semester": 4,
+      "address": {
+        "street": "Jl. Bulaksumur No. 45",
+        "city": "Yogyakarta",
+        "province": "DI Yogyakarta",
+        "postalCode": "55281",
+        "country": "Indonesia"
+      }
+    },
+    "skinAnalysis": null,
+    "preferences": {
+      "stylePreferences": ["Casual", "Boho", "Romantic"],
+      "sizePreferences": {
+        "top": "S",
+        "bottom": "S",
+        "shoes": "37"
+      },
+      "colorPreferences": ["Pink", "White", "Pastel", "Floral"],
+      "priceRange": {
+        "min": 30000,
+        "max": 200000
+      }
+    },
+    "orders": [
+      {
+        "orderId": "ORD-2024-003",
+        "date": "2024-10-20T11:30:00Z",
+        "status": "shipped",
+        "total": 165000,
+        "items": [
+          {
+            "productId": 9,
+            "name": "Floral Blouse",
+            "quantity": 1,
+            "price": 85000,
+            "size": "S"
+          },
+          {
+            "productId": 11,
+            "name": "Denim Skirt",
+            "quantity": 1,
+            "price": 80000,
+            "size": "S"
+          }
+        ]
+      }
+    ],
+    "cart": [],
+    "wishlist": [6, 9, 13, 15],
+    "stats": {
+      "totalOrders": 1,
+      "totalSpent": 165000,
+      "memberSince": "2024-05-15T00:00:00Z",
+      "lastLogin": "2024-12-02T20:10:00Z"
+    },
+    "notifications": {
+      "emailNotifications": true,
+      "smsNotifications": true,
+      "orderUpdates": true,
+      "promotions": false
+    }
+  },
+  {
+    "id": 3,
+    "username": "admin_campuswear",
+    "email": "admin@campuswear.com",
+    "password": "$2b$10$adminhashedpassword",
+    "role": "admin",
+    "isPremium": true,
+    "profile": {
+      "firstName": "Admin",
+      "lastName": "CampusWear",
+      "fullName": "Admin CampusWear",
+      "phone": "+6281122334455",
+      "dateOfBirth": "1995-01-01",
+      "gender": "other",
+      "university": "N/A",
+      "major": "N/A",
+      "semester": 0,
+      "address": {
+        "street": "Jl. Teknologi No. 1",
+        "city": "Jakarta",
+        "province": "DKI Jakarta",
+        "postalCode": "10110",
+        "country": "Indonesia"
+      }
+    },
+    "skinAnalysis": null,
+    "preferences": {
+      "stylePreferences": [],
+      "sizePreferences": {},
+      "colorPreferences": [],
+      "priceRange": {}
+    },
+    "orders": [],
+    "cart": [],
+    "wishlist": [],
+    "stats": {
+      "totalOrders": 0,
+      "totalSpent": 0,
+      "memberSince": "2024-01-01T00:00:00Z",
+      "lastLogin": "2024-12-03T18:00:00Z"
+    },
+    "notifications": {
+      "emailNotifications": true,
+      "smsNotifications": true,
+      "orderUpdates": true,
+      "promotions": false
+    },
+    "adminPermissions": {
+      "manageUsers": true,
+      "manageProducts": true,
+      "manageOrders": true,
+      "viewAnalytics": true,
+      "manageContent": true
+    }
+  },
+  {
+    "id": 4,
+    "username": "mike_johnson",
+    "email": "mike.johnson@student.univ.ac.id",
+    "password": "$2b$10$hashedpassword4",
+    "role": "customer",
+    "isPremium": true,
+    "profile": {
+      "firstName": "Mike",
+      "lastName": "Johnson",
+      "fullName": "Mike Johnson",
+      "phone": "+6285566778899",
+      "dateOfBirth": "1999-12-10",
+      "gender": "male",
+      "university": "Institut Teknologi Bandung",
+      "major": "Electrical Engineering",
+      "semester": 8,
+      "address": {
+        "street": "Jl. Ganesha No. 10",
+        "city": "Bandung",
+        "province": "Jawa Barat",
+        "postalCode": "40132",
+        "country": "Indonesia"
+      }
+    },
+    "skinAnalysis": {
+      "skinTone": "Cool",
+      "undertone": "Ash",
+      "season": "Winter",
+      "colorPalette": ["#000080", "#FF0000", "#FFD700", "#000000", "#FFFFFF"],
+      "recommendedColors": ["#000080", "#FF0000", "#FFD700", "#000000", "#FFFFFF"],
+      "avoidColors": ["#FFA500", "#8B4513", "#D2691E"],
+      "lastAnalysis": "2024-11-20T14:45:00Z"
+    },
+    "preferences": {
+      "stylePreferences": ["Streetwear", "Athletic", "Techwear"],
+      "sizePreferences": {
+        "top": "L",
+        "bottom": "L",
+        "shoes": "44"
+      },
+      "colorPreferences": ["Black", "Gray", "White", "Blue"],
+      "priceRange": {
+        "min": 75000,
+        "max": 500000
+      }
+    },
+    "orders": [
+      {
+        "orderId": "ORD-2024-004",
+        "date": "2024-11-01T16:20:00Z",
+        "status": "delivered",
+        "total": 425000,
+        "items": [
+          {
+            "productId": 2,
+            "name": "Tech Hoodie Black",
+            "quantity": 1,
+            "price": 225000,
+            "size": "L"
+          },
+          {
+            "productId": 4,
+            "name": "Cargo Pants Gray",
+            "quantity": 1,
+            "price": 200000,
+            "size": "L"
+          }
+        ]
+      }
+    ],
+    "cart": [
+      {
+        "productId": 8,
+        "name": "Running Shoes",
+        "quantity": 1,
+        "price": 350000,
+        "size": "44"
+      }
+    ],
+    "wishlist": [1, 3, 7, 10],
+    "stats": {
+      "totalOrders": 1,
+      "totalSpent": 425000,
+      "memberSince": "2024-02-14T00:00:00Z",
+      "lastLogin": "2024-12-03T12:30:00Z"
+    },
+    "notifications": {
+      "emailNotifications": true,
+      "smsNotifications": false,
+      "orderUpdates": true,
+      "promotions": true
+    }
+  },
+  {
+    "id": 5,
+    "username": "lisa_chen",
+    "email": "lisa.chen@student.univ.ac.id",
+    "password": "$2b$10$hashedpassword5",
+    "role": "customer",
+    "isPremium": false,
+    "profile": {
+      "firstName": "Lisa",
+      "lastName": "Chen",
+      "fullName": "Lisa Chen",
+      "phone": "+6287788990011",
+      "dateOfBirth": "2002-03-08",
+      "gender": "female",
+      "university": "Universitas Airlangga",
+      "major": "Psychology",
+      "semester": 2,
+      "address": {
+        "street": "Jl. Dharmawangsa No. 75",
+        "city": "Surabaya",
+        "province": "Jawa Timur",
+        "postalCode": "60286",
+        "country": "Indonesia"
+      }
+    },
+    "skinAnalysis": null,
+    "preferences": {
+      "stylePreferences": ["Minimalist", "Professional", "Casual"],
+      "sizePreferences": {
+        "top": "XS",
+        "bottom": "S",
+        "shoes": "36"
+      },
+      "colorPreferences": ["White", "Beige", "Black", "Navy"],
+      "priceRange": {
+        "min": 25000,
+        "max": 150000
+      }
+    },
+    "orders": [],
+    "cart": [
+      {
+        "productId": 12,
+        "name": "Blazer Navy",
+        "quantity": 1,
+        "price": 180000,
+        "size": "XS"
+      }
+    ],
+    "wishlist": [11, 14, 16, 18],
+    "stats": {
+      "totalOrders": 0,
+      "totalSpent": 0,
+      "memberSince": "2024-08-20T00:00:00Z",
+      "lastLogin": "2024-12-01T19:45:00Z"
+    },
+    "notifications": {
+      "emailNotifications": true,
+      "smsNotifications": true,
+      "orderUpdates": true,
+      "promotions": true
+    }
+  }
+]

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/customer.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            
+            <div class="navbar-nav">
+                <a href="./dashboard.html" class="nav-link">Dashboard</a>
+                <a href="./browse.html" class="nav-link active">Jelajahi</a>
+                <a href="./orders.html" class="nav-link">Pesanan</a>
+                <a href="./ai-coloring.html" class="nav-link">AI Style</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="./cart.html" class="btn btn-ghost btn-sm" style="position: relative;">
+                    🛒
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+                <div class="user-menu">
+                    <button class="btn btn-ghost" id="userMenuBtn" style="display: flex; align-items: center; gap: var(--space-2);">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userName">User</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown">
+                        <a href="./profile.html" class="dropdown-item">
+                            <span>👤</span> Profil
+                        </a>
+                        <a href="./dashboard.html" class="dropdown-item">
+                            <span>📊</span> Dashboard
+                        </a>
+                        <hr style="border: none; border-top: 1px solid var(--gray-200); margin: var(--space-2) 0;">
+                        <button onclick="logout()" class="dropdown-item" style="color: var(--error);">
+                            <span>🚪</span> Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top: 5rem; padding: var(--space-8);">
+        <div class="content-wrapper">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" style="margin-bottom: var(--space-6);">
+                <a href="browse.html">Katalog</a>
+                <span>/</span>
+                <span id="productCategory">Kategori</span>
+                <span>/</span>
+                <span id="productName">Nama Produk</span>
+            </nav>
+
+            <!-- Product Detail -->
+            <div class="product-detail-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-12);">
+                <!-- Image Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image" style="background: var(--gray-100); border-radius: var(--radius-2xl); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4);">
+                        <span style="font-size: 8rem;" id="productImage">👕</span>
+                    </div>
+                    <div class="thumbnail-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3);">
+                        <div class="thumbnail active" style="aspect-ratio: 1; background: var(--gray-100); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--primary-500);">👕</div>
+                        <div class="thumbnail" style="aspect-ratio: 1; background: var(--gray-100); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; cursor: pointer;">📷</div>
+                        <div class="thumbnail" style="aspect-ratio: 1; background: var(--gray-100); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; cursor: pointer;">📷</div>
+                        <div class="thumbnail" style="aspect-ratio: 1; background: var(--gray-100); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; cursor: pointer;">📷</div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+                        <span class="badge badge-success" id="productCondition">Like New</span>
+                        <span class="badge badge-primary" id="productSize">Size M</span>
+                    </div>
+
+                    <h1 id="productTitle" style="font-size: var(--text-3xl); margin-bottom: var(--space-4);">Kemeja Flannel Uniqlo</h1>
+
+                    <div class="product-price" style="margin-bottom: var(--space-6);">
+                        <span class="current-price" id="productPrice" style="font-size: var(--text-4xl); font-weight: 800; color: var(--primary-600);">Rp 150.000</span>
+                        <span class="original-price" id="productOriginalPrice" style="font-size: var(--text-xl); color: var(--gray-400); text-decoration: line-through; margin-left: var(--space-3);">Rp 450.000</span>
+                        <span class="discount-badge" style="background: var(--error); color: white; padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; margin-left: var(--space-3);">-67%</span>
+                    </div>
+
+                    <p id="productDescription" style="color: var(--gray-600); line-height: 1.7; margin-bottom: var(--space-6);">
+                        Kemeja flannel branded Uniqlo, kondisi 95% masih bagus, warna biru navy kotak-kotak. 
+                        Cocok untuk outfit casual maupun semi-formal. Bahan nyaman dan tidak mudah kusut.
+                    </p>
+
+                    <!-- AI Match Score (Premium) -->
+                    <div id="aiMatchSection" class="ai-match-card" style="display: none; background: linear-gradient(135deg, var(--primary-50), var(--secondary-100)); padding: var(--space-4); border-radius: var(--radius-xl); margin-bottom: var(--space-6);">
+                        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2);">
+                            <span style="font-size: var(--text-2xl);">🎯</span>
+                            <div>
+                                <div style="font-weight: 700; color: var(--primary-700);">AI Match Score: 95%</div>
+                                <div style="font-size: var(--text-sm); color: var(--gray-600);">Sangat cocok dengan profil warnamu!</div>
+                            </div>
+                        </div>
+                        <div class="match-bar" style="height: 8px; background: var(--gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                            <div style="width: 95%; height: 100%; background: linear-gradient(90deg, var(--primary-500), var(--secondary-500)); border-radius: var(--radius-full);"></div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="product-actions" style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <button class="btn btn-primary btn-lg" onclick="addToCart()" style="flex: 1;">
+                            🛒 Tambah ke Keranjang
+                        </button>
+                        <button class="btn btn-outline btn-lg" onclick="toggleWishlist()" id="wishlistBtn">
+                            🤍
+                        </button>
+                    </div>
+
+                    <!-- Seller Info -->
+                    <div class="seller-card" style="background: var(--gray-50); padding: var(--space-4); border-radius: var(--radius-xl);">
+                        <div style="display: flex; align-items: center; gap: var(--space-4);">
+                            <div style="width: 48px; height: 48px; background: var(--primary-500); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                                S
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 700;" id="sellerName">Seller Name</div>
+                                <div style="font-size: var(--text-sm); color: var(--gray-500);">⭐ 4.9 (120 ulasan)</div>
+                            </div>
+                            <button class="btn btn-secondary btn-sm">Lihat Profil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details Tabs -->
+            <div class="product-tabs">
+                <div class="tabs-header" style="display: flex; gap: var(--space-8); border-bottom: 2px solid var(--gray-200); margin-bottom: var(--space-6);">
+                    <button class="tab-btn active" onclick="switchTab('details')">Detail Produk</button>
+                    <button class="tab-btn" onclick="switchTab('shipping')">Pengiriman</button>
+                    <button class="tab-btn" onclick="switchTab('reviews')">Ulasan (12)</button>
+                </div>
+
+                <div class="tab-content" id="tabDetails">
+                    <div class="grid grid-2" style="gap: var(--space-8);">
+                        <div>
+                            <h3 style="margin-bottom: var(--space-4);">Spesifikasi</h3>
+                            <table class="spec-table" style="width: 100%;">
+                                <tr>
+                                    <td style="padding: var(--space-3) 0; color: var(--gray-500);">Kondisi</td>
+                                    <td style="padding: var(--space-3) 0; font-weight: 600;" id="specCondition">Sangat Baik</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: var(--space-3) 0; color: var(--gray-500);">Ukuran</td>
+                                    <td style="padding: var(--space-3) 0; font-weight: 600;" id="specSize">M</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: var(--space-3) 0; color: var(--gray-500);">Warna</td>
+                                    <td style="padding: var(--space-3) 0; font-weight: 600;" id="specColor">Navy</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: var(--space-3) 0; color: var(--gray-500);">Bahan</td>
+                                    <td style="padding: var(--space-3) 0; font-weight: 600;">Flannel Cotton</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: var(--space-3) 0; color: var(--gray-500);">Brand</td>
+                                    <td style="padding: var(--space-3) 0; font-weight: 600;">Uniqlo</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: var(--space-4);">AI Tags</h3>
+                            <div class="ai-tags" id="aiTags" style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+                                <span class="badge badge-primary">Casual</span>
+                                <span class="badge badge-primary">Formal</span>
+                                <span class="badge badge-secondary">Winter</span>
+                                <span class="badge badge-info">Blue Tone</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products" style="margin-top: var(--space-12);">
+                <h2 class="section-title" style="margin-bottom: var(--space-6);">🛍️ Produk Serupa</h2>
+                <div class="product-grid" id="relatedProducts">
+                    <!-- Dynamic related products -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Handle dropdown menu for customer pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isVisible = userDropdown.style.display === 'block';
+                    userDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/customer-product-detail.js"></script>
+</body>
+</html>

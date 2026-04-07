@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settlement - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link active">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>💸 Settlement Management</h1>
+            <p style="color: var(--gray-500);">Pembagian hasil penjualan dengan penjual</p>
+        </header>
+
+        <div class="admin-content">
+            <!-- Settlement Stats -->
+            <div class="admin-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); margin-bottom: var(--space-6);">
+                <div class="stat-card">
+                    <div class="stat-label">Pending Settlement</div>
+                    <div class="stat-value" id="pendingSettlement">Rp 0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Paid (Bulan Ini)</div>
+                    <div class="stat-value" id="totalPaid">Rp 0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Platform Fee (10%)</div>
+                    <div class="stat-value" id="platformFee">Rp 0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Seller Earnings</div>
+                    <div class="stat-value" id="sellerEarnings">Rp 0</div>
+                </div>
+            </div>
+
+            <!-- Revenue Split Visualization -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card-header">
+                    <h3>📊 Pembagian Revenue</h3>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center;">
+                        <div class="revenue-split" style="position: relative; height: 200px; background: conic-gradient(var(--primary-500) 0% 90%, var(--secondary-500) 90% 100%); border-radius: var(--radius-full);">
+                            <div style="position: absolute; inset: 20%; background: white; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                <div style="font-size: var(--text-3xl); font-weight: 800;">100%</div>
+                                <div style="color: var(--gray-500);">Total Revenue</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
+                                <div style="width: 20px; height: 20px; background: var(--primary-500); border-radius: var(--radius-sm);"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Seller (90%)</div>
+                                    <div style="font-size: var(--text-sm); color: var(--gray-500);">Pemilik barang</div>
+                                </div>
+                                <div style="font-weight: 700;" id="sellerPercent">90%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--space-3);">
+                                <div style="width: 20px; height: 20px; background: var(--secondary-500); border-radius: var(--radius-sm);"></div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Platform (10%)</div>
+                                    <div style="font-size: var(--text-sm); color: var(--gray-500);">Biaya layanan CampusWear</div>
+                                </div>
+                                <div style="font-weight: 700;" id="platformPercent">10%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Settlements -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>⏳ Menunggu Pembayaran</h3>
+                    <button class="btn btn-primary" onclick="processAllSettlements()">
+                        Bayar Semua
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Settlement ID</th>
+                                    <th>Penjual</th>
+                                    <th>Produk</th>
+                                    <th>Harga Jual</th>
+                                    <th>Platform Fee</th>
+                                    <th>Seller Gets</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingSettlementsTable">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settlement History -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>📜 Riwayat Settlement</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Penjual</th>
+                                    <th>Jumlah</th>
+                                    <th>Metode</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="settlementHistoryTable">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>💸 Proses Pembayaran</h3>
+                <button class="modal-close" onclick="closeModal('paymentModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="paymentDetails" style="margin-bottom: var(--space-6);">
+                    <!-- Payment details -->
+                </div>
+                
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label class="form-label">Metode Pembayaran</label>
+                        <select class="form-select" id="paymentMethod">
+                            <option value="transfer">Transfer Bank</option>
+                            <option value="ewallet">E-Wallet</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Catatan</label>
+                        <textarea class="form-textarea" id="paymentNotes" placeholder="Nomor referensi, dll..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal('paymentModal')">Batal</button>
+                <button class="btn btn-primary" onclick="confirmPayment()">Konfirmasi Pembayaran</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-settlement.js"></script>
+</body>
+</html>

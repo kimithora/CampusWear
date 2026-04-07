@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link active">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>🏷️ Inventory Management</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="exportInventory()">
+                    📥 Export
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <!-- Inventory Stats -->
+            <div class="admin-stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); margin-bottom: var(--space-6);">
+                <div class="stat-card">
+                    <div class="stat-label">Total SKU</div>
+                    <div class="stat-value" id="totalSKU">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Available</div>
+                    <div class="stat-value" id="availableStock">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Sold</div>
+                    <div class="stat-value" id="soldStock">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Low Stock</div>
+                    <div class="stat-value" id="lowStock">0</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: var(--space-4); align-items: end;">
+                        <div class="form-group" style="margin: 0;">
+                            <label class="form-label">Cari Produk</label>
+                            <div class="input-group">
+                                <span class="input-icon">🔍</span>
+                                <input type="text" class="form-input" id="searchInventory" placeholder="Nama produk...">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label class="form-label">Kategori</label>
+                            <select class="form-select" id="categoryFilter">
+                                <option value="">Semua</option>
+                                <option value="kaos">Kaos</option>
+                                <option value="kemeja">Kemeja</option>
+                                <option value="celana">Celana</option>
+                                <option value="jaket">Jaket</option>
+                                <option value="hoodie">Hoodie</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="statusFilter">
+                                <option value="">Semua</option>
+                                <option value="available">Available</option>
+                                <option value="sold">Sold</option>
+                                <option value="reserved">Reserved</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="applyInventoryFilters()">Filter</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th>Kategori</th>
+                                    <th>Harga</th>
+                                    <th>Stok</th>
+                                    <th>Status</th>
+                                    <th>AI Tags</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTable">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-inventory.js"></script>
+</body>
+</html>

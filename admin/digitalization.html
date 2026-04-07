@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitalization - CampusWear</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="navbar-brand">
+                <div class="brand-icon">CW</div>
+                <span>CampusWear</span>
+            </a>
+            <div class="admin-badge">ADMIN</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="consigment.html" class="sidebar-link">
+                <span>📦</span> Consignment
+            </a>
+            <a href="processing.html" class="sidebar-link">
+                <span>✨</span> Processing
+            </a>
+            <a href="digitalization.html" class="sidebar-link active">
+                <span>📸</span> Digitalization
+            </a>
+            <a href="inventory.html" class="sidebar-link">
+                <span>🏷️</span> Inventory
+            </a>
+            <a href="sales.html" class="sidebar-link">
+                <span>💰</span> Sales
+            </a>
+            <a href="settlement.html" class="sidebar-link">
+                <span>💸</span> Settlement
+            </a>
+            <a href="analytics.html" class="sidebar-link">
+                <span>📈</span> Analytics
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <span>👤</span> Profil
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="sidebar-link" style="color: var(--error);">
+                <span>🚪</span> Keluar
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>📸 Digitalization Studio</h1>
+            <p style="color: var(--gray-500);">Foto produk untuk katalog online</p>
+        </header>
+
+        <div class="admin-content">
+            <!-- Photo Queue -->
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>📋 Antrian Foto</h3>
+                    <span class="badge badge-warning" id="photoQueueCount">0 item menunggu</span>
+                </div>
+                <div class="card-body">
+                    <div class="photo-queue" id="photoQueue" style="display: flex; gap: var(--space-4); overflow-x: auto; padding-bottom: var(--space-4);">
+                        <!-- Queue items -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Studio -->
+            <div class="grid grid-2" style="gap: var(--space-6);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📷 Studio Mini</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="studio-area" style="background: var(--gray-900); aspect-ratio: 1; border-radius: var(--radius-xl); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; position: relative; overflow: hidden;">
+                            <div id="studioPlaceholder" style="text-align: center;">
+                                <div style="font-size: 4rem; margin-bottom: var(--space-4);">📷</div>
+                                <p>Pilih item dari antrian untuk mulai</p>
+                            </div>
+                            <div id="studioPreview" style="display: none; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 6rem;">
+                                👕
+                            </div>
+                            <div class="studio-lights" style="position: absolute; top: var(--space-4); left: var(--space-4); right: var(--space-4); display: flex; justify-content: space-between;">
+                                <span style="font-size: 2rem;">💡</span>
+                                <span style="font-size: 2rem;">💡</span>
+                                <span style="font-size: 2rem;">💡</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: var(--space-3); margin-top: var(--space-4);">
+                            <button class="btn btn-primary" style="flex: 1;" onclick="capturePhoto()">
+                                📸 Capture
+                            </button>
+                            <button class="btn btn-secondary" onclick="retakePhoto()">
+                                🔄 Retake
+                            </button>
+                        </div>
+                        
+                        <div style="margin-top: var(--space-4);">
+                            <label class="form-label">Atau upload foto</label>
+                            <input type="file" class="form-input" accept="image/*" onchange="uploadPhoto(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📝 Detail Produk</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="productDetailForm">
+                            <div class="form-group">
+                                <label class="form-label">Nama Produk</label>
+                                <input type="text" class="form-input" id="productName" placeholder="Nama produk">
+                            </div>
+                            
+                            <div class="grid grid-2" style="gap: var(--space-4);">
+                                <div class="form-group">
+                                    <label class="form-label">Kategori</label>
+                                    <select class="form-select" id="productCategory">
+                                        <option value="kaos">Kaos</option>
+                                        <option value="kemeja">Kemeja</option>
+                                        <option value="celana">Celana</option>
+                                        <option value="jaket">Jaket</option>
+                                        <option value="hoodie">Hoodie</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Ukuran</label>
+                                    <select class="form-select" id="productSize">
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-2" style="gap: var(--space-4);">
+                                <div class="form-group">
+                                    <label class="form-label">Harga Jual</label>
+                                    <input type="number" class="form-input" id="productPrice" placeholder="150000">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Harga Original</label>
+                                    <input type="number" class="form-input" id="originalPrice" placeholder="450000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Deskripsi</label>
+                                <textarea class="form-textarea" id="productDescription" rows="3" placeholder="Deskripsi produk..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">AI Tags (Auto)</label>
+                                <div id="aiTagsDisplay" style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+                                    <span class="badge badge-primary">Casual</span>
+                                    <span class="badge badge-secondary">Blue Tone</span>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-4);" onclick="publishProduct()">
+                                🚀 Publish ke Katalog
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recently Published -->
+            <div class="card" style="margin-top: var(--space-6);">
+                <div class="card-header">
+                    <h3>✅ Baru Dipublish</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Produk</th>
+                                    <th>Harga</th>
+                                    <th>Status</th>
+                                    <th>Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentlyPublished">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: var(--space-8); color: var(--gray-500);">
+                                        Belum ada produk yang dipublish
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin-digitalization.js"></script>
+</body>
+</html>
