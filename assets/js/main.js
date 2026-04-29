@@ -234,3 +234,112 @@ window.CampusWear = {
     Storage,
     Session
 };
+
+/* ============================================
+   CAMPUSWEAR - MAIN JS (Utility & Core)
+   ============================================ */
+
+const CampusWear = {
+    // ========== STORAGE ==========
+    Storage: {
+        get(key, defaultValue = null) {
+            try {
+                const data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : defaultValue;
+            } catch (e) {
+                return defaultValue;
+            }
+        },
+        set(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        },
+        remove(key) {
+            localStorage.removeItem(key);
+        }
+    },
+
+    // ========== SESSION ==========
+    Session: {
+        SESSION_KEY: 'campuswear_session',
+        
+        create(user) {
+            const session = {
+                userId: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                campus: user.campus,
+                isPremium: user.isPremium,
+                loginAt: new Date().toISOString()
+            };
+            CampusWear.Storage.set(this.SESSION_KEY, session);
+        },
+        
+        getCurrentUser() {
+            return CampusWear.Storage.get(this.SESSION_KEY, null);
+        },
+        
+        destroy() {
+            CampusWear.Storage.remove(this.SESSION_KEY);
+        }
+    },
+
+    // ========== UTILS ==========
+    Utils: {
+        generateId() {
+            return 'usr_' + Math.random().toString(36).substr(2, 9);
+        },
+        
+        isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+        
+        showAlert(message, type = 'info') {
+            // Remove existing alert
+            const existing = document.querySelector('.campuswear-alert');
+            if (existing) existing.remove();
+            
+            const alert = document.createElement('div');
+            alert.className = `campuswear-alert alert-${type}`;
+            alert.textContent = message;
+            
+            // Style dasar (bisa kamu pindah ke CSS)
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 9999;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            if (type === 'success') alert.style.background = '#10b981';
+            else if (type === 'error') alert.style.background = '#ef4444';
+            else alert.style.background = '#3b82f6';
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+    }
+};
+
+// Tambahin CSS animation minimal di head kalau belum ada
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
